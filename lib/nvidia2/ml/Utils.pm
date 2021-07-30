@@ -1,3 +1,9 @@
+#####
+# this is a package totally created and owned by BLIAKO
+# it contains utilities to interact with the nvidia2::ml
+# for example enquire_gpu_hardware()
+#####
+
 package nvidia2::ml::Utils;
 
 use strict;
