@@ -906,6 +906,8 @@ Provides a Perl interface to GPU management and monitoring functions.
 
 This is a wrapper around the NVML library.  For information about the NVML library, see the NVML documentation.
 
+=head1 UPDATE
+
 B<UPDATE 30 Jul 2021>: as per L<https://docs.nvidia.com/deploy/nvml-api/change-log.html>
 Perl bindings support on behalf of NVIDIA has been B<discontinued>.
 This is cited as a change between versions v346 and v349 in the
