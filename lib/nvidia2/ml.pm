@@ -862,6 +862,7 @@ __END__
 
 nvidia2::ml - Perl bindings to NVML, the NVIDIA Management Library
 
+
 =head1 SYNOPSIS
 
     use nvidia2::ml qw(:all);
