@@ -1,0 +1,5 @@
+Revision history for nvidia2-ml
+
+0.01    2020-07-30
+        First version, released on an unsuspecting world based on nvidia::ml module on CPAN which has not been updated since 2013. This is a copy of nvidia::ml with modification in nvml_wrap.c to make it compile and also added new bindings to keep up-to-date with the nvidia-ml library.
+
