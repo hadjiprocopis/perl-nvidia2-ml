@@ -893,11 +893,38 @@ nvidia2::ml - Perl bindings to NVML, the NVIDIA Management Library
  
     nvmlShutdown();
 
+    # there is a higher-level module which does some standard enquiries for you
+    # and returns results back as a hashref and for each GPU found
+    use nvidia2::ml::Utils;
+
+    my $enquiry_result = nvidia2::ml::Utils::enquire_gpu_hardware();
+    print Dumper($enquiry_result);
+
 =head1 DESCRIPTION
 
 Provides a Perl interface to GPU management and monitoring functions.
 
 This is a wrapper around the NVML library.  For information about the NVML library, see the NVML documentation.
+
+B<UPDATE 30 Jul 2021>: as per L<https://docs.nvidia.com/deploy/nvml-api/change-log.html>
+Perl bindings support on behalf of NVIDIA has been B<discontinued>.
+This is cited as a change between versions v346 and v349 in the
+linked document. The original module L<nvidia::ml> at CPAN has last
+been updated in 2013. It does not work for (at least) Perl version 5.32
+because the SWIG-made code in provided C<nvml_wrap.c> does not compile,
+it complains about C<bool undefined>. The current module C<nvidia2::ml>
+was created in order to fix that problem and also bring the Perl Bindings
+up to date with latest nvidia-ml library, which is provided by
+the NVIDIA CUDA Toolkit at L<https://developer.nvidia.com/cuda-downloads>.
+The current C<nvidia2::ml> is a copy-paste of L<nvidia::ml> with the
+addition of more bindings and the fixing of C<nvml_wrap.c> in order
+to compile and be compatible with newer Perl versions. I do not
+own the copyright to L<nvidia::ml> and I hereby declare
+that  C<nvidia2::ml> uses all code from L<nvidia::ml> which
+is owned and created by NVIDIA. If that is
+an infringmenet of Copyright on my behalf then please let me know as
+soon as possible at C<bliako at cpan dot org>.
+
 
 =head1 REQUIRES
 

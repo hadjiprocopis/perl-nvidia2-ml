@@ -27,17 +27,17 @@ sub enquire_gpu_hardware {
 #		nvidia::ml->import();
 #		1;
 #	};
-#	if( ! $rc ){ print STDERR "$whoami (via $parent) : error, failed to import modile 'nvidia::ml' at runtime (require). This module is provided at the root dir of this package. Here is the error:\n$@\n"; return undef }
+#	if( ! $rc ){ print STDERR "$whoami (via $parent) : error, failed to import modile 'nvidia::ml' at runtime (require). This module is provided at the root dir of this package. Here is the error:\n$@\n"; nvidia2::ml::nvmlShutdown(); return undef }
 
 	# init ...
-	$rc = nvidia2::ml::nvmlInit(); if( $rc != $nvidia2::ml::bindings::NVML_SUCCESS ){ print STDERR "$whoami (via $parent) : error, call to '".'nvidia2::ml::nvmlInit'."()' has failed with code '$rc'.\n"; return undef }
+	$rc = nvidia2::ml::nvmlInit(); if( $rc != $nvidia2::ml::bindings::NVML_SUCCESS ){ print STDERR "$whoami (via $parent) : error, call to '".'nvidia2::ml::nvmlInit'."()' has failed with code '$rc'.\n"; nvidia2::ml::nvmlShutdown(); return undef }
 
 	for my $abind (qw/
 		nvmlDeviceGetCount nvmlSystemGetDriverVersion
 	/){
 		no strict 'refs';
 		$asub = "nvidia2::ml::$abind";
-		($rc, @result) = $asub->(); if( $rc != $nvidia2::ml::bindings::NVML_SUCCESS ){ print STDERR "$whoami (via $parent) : error, call to '"."$asub"."()' has failed with code '$rc'.\n"; return undef }
+		($rc, @result) = $asub->(); if( $rc != $nvidia2::ml::bindings::NVML_SUCCESS ){ print STDERR "$whoami (via $parent) : error, call to '"."$asub"."()' has failed with code '$rc'.\n"; nvidia2::ml::nvmlShutdown(); return undef }
 		$ret->{$abind} = [@result];
 	}
 
@@ -50,7 +50,7 @@ sub enquire_gpu_hardware {
 	$ret->{GPU} = [];
 	for my $aGPUindex (0..($numGPU-1)){
 		my $device = nvidia2::ml::nvmlDeviceGetHandleByIndex($aGPUindex);
-		if( ! defined $device ){ print STDERR "$whoami (via $parent) : error, failed to get device handle for GPU with index $aGPUindex.\n"; return undef }
+		if( ! defined $device ){ print STDERR "$whoami (via $parent) : error, failed to get device handle for GPU with index $aGPUindex.\n"; nvidia2::ml::nvmlShutdown(); return undef }
 		my $RG = {};
 		push @{$ret->{GPU}}, $RG;
 		for my $abind (qw/
@@ -59,7 +59,7 @@ sub enquire_gpu_hardware {
 		/){
 			no strict 'refs';
 			$asub = "nvidia2::ml::$abind";
-			($rc, @result) = $asub->($device); if( $rc != $nvidia2::ml::bindings::NVML_SUCCESS ){ print STDERR "$whoami (via $parent) : error, call to '"."$asub"."()' has failed for GPU with index '$aGPUindex' with error code '$rc'.\n"; return undef }
+			($rc, @result) = $asub->($device); if( $rc != $nvidia2::ml::bindings::NVML_SUCCESS ){ print STDERR "$whoami (via $parent) : error, call to '"."$asub"."()' has failed for GPU with index '$aGPUindex' with error code '$rc'.\n"; nvidia2::ml::nvmlShutdown(); return undef }
 			$RG->{$abind} = [@result];
 		}
 	}
