@@ -1,0 +1,3 @@
+sed -i -e '/#undef bool/d' nvml_wrap.c
+
+and then fix the typecasts in lines 2041, 2046, 2051 of nvml_wrap.c
