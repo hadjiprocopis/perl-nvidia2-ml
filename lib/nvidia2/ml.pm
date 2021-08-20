@@ -896,6 +896,7 @@ nvidia2::ml - Perl bindings to NVML, the NVIDIA Management Library
     # there is a higher-level module which does some standard enquiries for you
     # and returns results back as a hashref and for each GPU found
     use nvidia2::ml::Utils;
+    use Data::Dumper;
 
     my $enquiry_result = nvidia2::ml::Utils::enquire_gpu_hardware();
     print Dumper($enquiry_result);
@@ -924,7 +925,8 @@ to compile and be compatible with newer Perl versions. I do not
 own the copyright to L<nvidia::ml> and I hereby declare
 that  C<nvidia2::ml> uses all code from L<nvidia::ml> which
 is owned and created by NVIDIA. If that is
-an infringmenet of Copyright on my behalf then please let me know as
+an infringmenet of Copyright on my (Andreas Hadjiprocopis)
+behalf then please let me know as
 soon as possible at C<bliako at cpan dot org>.
 
 
