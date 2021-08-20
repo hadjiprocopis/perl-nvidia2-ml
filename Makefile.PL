@@ -22,7 +22,7 @@ package MY;
 sub libscan {
     my( $mm, $file ) = @_;
     return if $file =~ /(push_to_GIT)|(\.lock)/;
-    warn "@_\n";
+    #warn "scanning '$file' ...\n";
     return $file;
 }
 # BLIAKO: end addition
