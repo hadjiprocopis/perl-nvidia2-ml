@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 # This test does a basic `use` check on all the code.
-our $VERSION = 0.09;
+our $VERSION = 5.03;
 
 use Test::More;
 use nvidia2::ml::Utils;

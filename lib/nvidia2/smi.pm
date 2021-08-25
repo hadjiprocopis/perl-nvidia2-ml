@@ -41,7 +41,7 @@
 
 package  nvidia2::smi;
 
-our $VERSION = 5.00;
+our $VERSION = 5.03;
 
 use strict;
 use warnings;

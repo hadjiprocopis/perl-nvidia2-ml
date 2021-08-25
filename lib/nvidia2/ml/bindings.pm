@@ -6,7 +6,7 @@
 
 package nvidia2::ml::bindings;
 
-our $VERSION = 5.00;
+our $VERSION = 5.03;
 
 use base qw(Exporter);
 use base qw(DynaLoader);

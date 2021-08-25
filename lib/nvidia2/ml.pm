@@ -38,7 +38,7 @@ require Exporter;
 
 our @ISA = qw(Exporter);
 
-our $VERSION = "5.00";
+our $VERSION = "5.03";
 
 our @EXPORT_OK =
 # bliako added nvmlDeviceGetCudaComputeCapability

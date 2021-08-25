@@ -36,21 +36,52 @@ if( exists($vars{'CUDA_NVML_LINK'}) && defined($vars{'CUDA_NVML_LINK'}) ){
 
 my @libs;
 my @incs = qw/-I./;
-if( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
-	if( $^O eq 'MSWin32' ){
-		push @libs, '-L"'.(exists($vars{'CUDA_LIBS_PATH'})?$vars{'CUDA_LIBS_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'Win32')).'"';
-		push @incs, '-I"'.(exists($vars{'CUDA_INC_PATH'})?$vars{'CUDA_INC_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'include')).'"';
-	} elsif( $^O eq 'linux' ){
-		push @libs, '-L"'.(exists($vars{'CUDA_LIBS_PATH'})?$vars{'CUDA_LIBS_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'lib')).'"';
-		push @incs, '-I"'.(exists($vars{'CUDA_INC_PATH'})?$vars{'CUDA_INC_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'include')).'"';
-	} elsif( $^O eq 'darwin' ){
-		push @libs, '-L"'.(exists($vars{'CUDA_LIBS_PATH'})?$vars{'CUDA_LIBS_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'lib')).'"';
-		push @incs, '-I"'.(exists($vars{'CUDA_INC_PATH'})?$vars{'CUDA_INC_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'include')).'"';
-	} else {
-		push @libs, '-L"'.(exists($vars{'CUDA_LIBS_PATH'})?$vars{'CUDA_LIBS_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'lib')).'"';
-		push @incs, '-I"'.(exists($vars{'CUDA_INC_PATH'})?$vars{'CUDA_INC_PATH'}:File::Spec->catdir($vars{'CUDA_PATH'}, 'include')).'"';
+if( $^O eq 'MSWin32' ){
+	if( exists($vars{'CUDA_LIBS_PATH'}) && defined($vars{'CUDA_LIBS_PATH'}) ){
+		push @libs, '-L"'.$vars{'CUDA_LIBS_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-L"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'Win32').'"';
+	}
+	if( exists($vars{'CUDA_INC_PATH'}) && defined($vars{'CUDA_INC_PATH'}) ){
+		push @libs, '-I"'.$vars{'CUDA_INC_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-I"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'include').'"';
+	}
+} elsif( $^O eq 'linux' ){
+	if( exists($vars{'CUDA_LIBS_PATH'}) && defined($vars{'CUDA_LIBS_PATH'}) ){
+		push @libs, '-L"'.$vars{'CUDA_LIBS_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-L"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'lib').'"';
+	}
+	if( exists($vars{'CUDA_INC_PATH'}) && defined($vars{'CUDA_INC_PATH'}) ){
+		push @libs, '-I"'.$vars{'CUDA_INC_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-I"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'include').'"';
+	}
+} elsif( $^O eq 'darwin' ){
+	if( exists($vars{'CUDA_LIBS_PATH'}) && defined($vars{'CUDA_LIBS_PATH'}) ){
+		push @libs, '-L"'.$vars{'CUDA_LIBS_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-L"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'lib').'"';
+	}
+	if( exists($vars{'CUDA_INC_PATH'}) && defined($vars{'CUDA_INC_PATH'}) ){
+		push @libs, '-I"'.$vars{'CUDA_INC_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-I"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'include').'"';
+	}
+} else {
+	if( exists($vars{'CUDA_LIBS_PATH'}) && defined($vars{'CUDA_LIBS_PATH'}) ){
+		push @libs, '-L"'.$vars{'CUDA_LIBS_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-L"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'lib').'"';
+	}
+	if( exists($vars{'CUDA_INC_PATH'}) && defined($vars{'CUDA_INC_PATH'}) ){
+		push @libs, '-I"'.$vars{'CUDA_INC_PATH'}.'"';
+	} elsif( exists($vars{'CUDA_PATH'}) && defined($vars{'CUDA_PATH'}) ){
+		push @libs, '-I"'.File::Spec->catdir($vars{'CUDA_PATH'}, 'include').'"';
 	}
 }
+
 push @libs, $vars{'CUDA_NVML_LINK'};
 print "$0 : using LIB: @libs\n";
 print "$0 : using INC: @incs\n";

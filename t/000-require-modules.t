@@ -1,5 +1,5 @@
 # This test does a basic `use` check on all the code.
-our $VERSION = 0.01;
+our $VERSION = 5.03;
 
 use Test::More;
 

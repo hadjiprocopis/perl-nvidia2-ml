@@ -11,7 +11,7 @@ use warnings;
 
 use nvidia2::ml;
 
-our $VERSION = 5.00;
+our $VERSION = 5.03;
 
 sub enquire_gpu_hardware {
 	my $parent = (caller(1))[3]; if( ! defined($parent) ){ $parent = 'N/A' }
