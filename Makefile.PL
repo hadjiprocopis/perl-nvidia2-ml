@@ -99,7 +99,7 @@ my %mkparams = (
     LIBS	      => join(' ', @libs),
     dist	      => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     VERSION_FROM      => 'lib/nvidia2/ml.pm',
-    ABSTRACT          => 'Perl bindings to NVML, the NVIDIA Management Library - this is a 2021 version taken over by BLIAKO heavily based on original nvidia::ml CPAN package',
+    ABSTRACT          => 'Perl bindings to NVML, the NVIDIA Management Library - this is a 2021 version taken over by BLIAKO heavily based on original nvidia::ml CPAN package. BLIAKO has no claim to any copyright.',
 # BLIAKO: end addition
 );
 

@@ -1,3 +1,35 @@
+The problems with the original module supplied by NVIDIA:
+  nvidia::ml
+can be fixed very easily with the following:
+
+1):
 sed -i -e '/#undef bool/d' nvml_wrap.c
 
-and then fix the typecasts in lines 2041, 2046, 2051 of nvml_wrap.c
+2):
+fix the typecasts in lines 2041, 2046, 2051 of nvml_wrap.c
+
+I have filed a bug report on this on 27-July-2021, at:
+
+  https://rt.cpan.org/Public/Bug/Display.html?id=138076
+
+
+I have also included ways to fix it, including tips from:
+
+   https://github.com/WGLab/PennCNV/issues/18#issuecomment-355322600
+
+So, until NVIDIA applies these fixes (the module nvidia::ml has
+been updated last on 2013) I feel I need to create a parallel module
+  nvidia2::ml
+
+as I need it and some modules I wrote need it.
+
+If there is a legal or other problem please let me know ASAP and I
+will consider it. I hereby declare that I do not claim any copyright
+on the new module
+  nvidia2::ml
+
+All its copyrights are as originally were with NVIDIA.
+
+bw,
+
+Andreas Hadjiprocopis
